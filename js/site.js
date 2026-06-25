@@ -184,7 +184,7 @@ function renderHome() {
     const a = el("a", "proj-card reveal");
     a.href = "project.html?slug=" + encodeURIComponent(p.slug);
     a.innerHTML =
-      `<div class="proj-figure"><img src="${esc(p.figure)}" alt="${esc(tr(p.name))}" loading="lazy"></div>` +
+      `<div class="proj-figure"><img src="${esc(p.thumb || p.figure)}" alt="${esc(tr(p.name))}" loading="lazy"></div>` +
       `<div class="proj-body"><h3>${esc(tr(p.name))}</h3>` +
       `<p class="one">${esc(tr(p.oneLiner))}</p>` +
       `<span class="proj-more">${esc(tr(UI.more))} ›</span></div>`;
