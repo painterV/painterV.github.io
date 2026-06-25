@@ -306,10 +306,9 @@ function renderCompany() {
     `<span class="domain-chip"><svg viewBox="0 0 48 48"><use href="#${d.icon}"/></svg>${esc(tr(d.label))}</span>`).join("");
   let mentText = "";
   if (e.mentored) {
-    const n = e.mentored;
     mentText = LANG === "zh"
-      ? `带教 ${n} 名工程师${e.mentoredOngoing ? "(至今)" : ""}`
-      : `Mentored ${n} engineer${n > 1 ? "s" : ""}${e.mentoredOngoing ? " so far" : ""}`;
+      ? `带教工程师${e.mentoredOngoing ? "(至今)" : ""}`
+      : `Mentored engineers${e.mentoredOngoing ? " so far" : ""}`;
   }
   const mentStat = mentText
     ? `<div class="ment-stat"><svg viewBox="0 0 48 48"><use href="#ic-mentor"/></svg>${esc(mentText)}</div>` : "";

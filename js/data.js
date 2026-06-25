@@ -34,7 +34,6 @@ const EXPERIENCE = [
     color: "#1d3f63",
     current: true,
     location: T("Tokyo, Japan", "日本 · 东京"),
-    dept: T("Data Engineering", "数据工程"),
     mentored: 3, mentoredOngoing: true,
     domains: [
       { icon: "ic-basket", label: T("Basket", "购物篮") },
@@ -67,7 +66,6 @@ const EXPERIENCE = [
     logo: "img/companies/qqmusic.png",
     color: "#15b86c",
     location: T("Shenzhen, China", "中国 · 深圳"),
-    dept: T("Data Intelligence Center", "数据智能中心"),
     mentored: 2,
     domains: [
       { icon: "ic-music", label: T("Music", "音乐") },
@@ -75,16 +73,16 @@ const EXPERIENCE = [
     role: T("Senior Software Engineer", "高级软件工程师"),
     date: "Sep 2019 — Nov 2022 · Shenzhen",
     summary: T(
-      "Music-recommendation backend R&D in Tencent Music's Data Intelligence Center; promoted twice over three years.",
-      "在腾讯音乐数据智能中心做音乐推荐后台研发;三年内两次晋升。"
+      "Music-recommendation backend R&D at Tencent Music; promoted twice over three years.",
+      "在腾讯音乐做音乐推荐后台研发;三年内两次晋升。"
     ),
     focus: T(
-      "One of Tencent Music's core departments, the Data Intelligence Center — R&D on the music-recommendation backend for QQ Music. Three years climbing both the stack and the ladder, with two promotions.",
-      "腾讯音乐核心部门之一——数据智能中心,负责 QQ 音乐音乐推荐后台服务的研发。三年里在技术栈与职级上一路向上,期间两次晋升。"
+      "One of Tencent Music's core data teams — R&D on the music-recommendation backend for QQ Music. Three years climbing both the stack and the ladder, with two promotions.",
+      "腾讯音乐核心数据团队之一,负责 QQ 音乐音乐推荐后台服务的研发。三年里在技术栈与职级上一路向上,期间两次晋升。"
     ),
     journey: [
       { date: "Sep 2019", title: T("Joined — Recommendation Backend", "入职 — 推荐后台"),
-        note: T("Joined the Data Intelligence Center; built the real-time vector-retrieval stack (hundreds of indexes, a notable DAU lift).", "加入数据智能中心;构建实时向量检索栈(数百索引,DAU 显著提升)。") },
+        note: T("Joined a core data team; built the real-time vector-retrieval stack (hundreds of indexes, a notable DAU lift).", "加入核心数据团队;构建实时向量检索栈(数百索引,DAU 显著提升)。") },
       { date: "Sep 2020", title: T("Promoted (after 1 year)", "晋升(一年后)"),
         note: T("Unified fragmented recall scenarios into a DAG operator framework.", "将碎片化召回场景统一为 DAG 算子框架。") },
       { date: "2022", title: T("Promoted again (1.5 years later)", "再次晋升(一年半后)"),
@@ -99,7 +97,6 @@ const EXPERIENCE = [
     logo: "img/companies/baidu.svg",
     color: "#2319dc",
     location: T("Beijing, China", "中国 · 北京"),
-    dept: T("Core Commercialization", "核心商业化"),
     mentored: 1,
     domains: [
       { icon: "ic-ad", label: T("Advertising", "广告") },
@@ -107,18 +104,18 @@ const EXPERIENCE = [
     role: T("Engineer · Search Ads", "工程师 · 搜索广告"),
     date: "Jul 2017 — Sep 2019 · Beijing",
     summary: T(
-      "Data analysis for search advertising in Baidu's Core Commercialization department; grew from junior to senior engineer.",
-      "百度核心商业化部门的搜索广告数据分析;从初级工程师成长为高级工程师。"
+      "Data analysis for search advertising at Baidu; grew from junior to senior engineer.",
+      "百度搜索广告业务的数据分析;从初级工程师成长为高级工程师。"
     ),
     focus: T(
-      "Baidu's Core Commercialization department — data analysis for the search-advertising business, mining user intent at web scale on Hadoop/MapReduce. This is where I grew from junior to senior engineer and got my first taste of large-scale data in production.",
-      "百度核心商业化部门 —— 搜索广告业务的数据分析,在海量规模上(Hadoop/MapReduce)挖掘用户意图。我在这里从初级成长为高级工程师,第一次接触生产环境的大规模数据。"
+      "Baidu's search-advertising business — web-scale data analysis on Hadoop/MapReduce, mining user intent. This is where I grew from junior to senior engineer and got my first taste of large-scale data in production.",
+      "百度搜索广告业务 —— 在海量规模上(Hadoop/MapReduce)做数据分析、挖掘用户意图。我在这里从初级成长为高级工程师,第一次接触生产环境的大规模数据。"
     ),
     journey: [
-      { date: "Jul 2017", level: "T3", title: T("Junior Engineer — Search Ads", "初级工程师 — 搜索广告"),
-        note: T("Joined the Core Commercialization department; data analysis for the search-advertising business.", "入职核心商业化部门;从事搜索广告业务的数据分析。") },
-      { date: "2019", level: "T4", title: T("Promoted to Senior Engineer", "晋升高级工程师"),
-        note: T("Grew from junior to senior (T3 → T4), owning query-prefix ad suggestion and ad-matching strategy.", "从初级成长为高级(T3 → T4),负责搜索前缀广告推荐与广告匹配策略。") },
+      { date: "Jul 2017", title: T("Junior Engineer — Search Ads", "初级工程师 — 搜索广告"),
+        note: T("Joined the search-advertising business; data analysis at scale.", "加入搜索广告业务;从事大规模数据分析。") },
+      { date: "2019", title: T("Promoted to Senior Engineer", "晋升高级工程师"),
+        note: T("Grew from junior to senior, owning query-prefix ad suggestion and ad-matching strategy.", "从初级成长为高级,负责搜索前缀广告推荐与广告匹配策略。") },
     ],
     projects: ["search-ad-suggestion"],
   },
