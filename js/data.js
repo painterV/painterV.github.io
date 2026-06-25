@@ -246,9 +246,30 @@ const EDUCATION = [
 
 /* Each project gets its own page at project.html?slug=<slug>.
    figure: path to a figure shown on the home card AND the detail page. */
+/* Skill set — soft/architectural competencies a project demonstrates (not tech stack). */
+const SK = {
+  systemDesign:   T("System Design", "系统设计"),
+  distributed:    T("Distributed Systems", "分布式系统"),
+  architecture:   T("Architecture", "架构设计"),
+  perf:           T("Performance Optimization", "性能优化"),
+  configDriven:   T("Config-driven Design", "配置化设计"),
+  dataModeling:   T("Data Modeling", "数据建模"),
+  crossTeam:      T("Cross-team Collaboration", "跨团队协作"),
+  mentoring:      T("Mentoring", "指导带教"),
+  techLead:       T("Technical Leadership", "技术领导"),
+  ownership:      T("Ownership", "Owner 意识"),
+  reliability:    T("Reliability Engineering", "可靠性工程"),
+  comms:          T("Stakeholder Communication", "干系人沟通"),
+  problemSolving: T("Problem Solving", "问题拆解"),
+  legacy:         T("Legacy Modernization", "遗留系统现代化"),
+  recsys:         T("Recommendation Systems", "推荐系统"),
+  mlEng:          T("ML Engineering", "机器学习工程"),
+};
+
 const PROJECTS = [
   {
     slug: "core-settlement-engine",
+    skills: [SK.systemDesign, SK.reliability, SK.dataModeling, SK.techLead, SK.ownership],
     name: T("Core Settlement Engine", "核心结算引擎"),
     oneLiner: T(
       "Transaction-grade batch validation for digital coupon clearing.",
@@ -270,6 +291,7 @@ const PROJECTS = [
   },
   {
     slug: "cloud-modernization",
+    skills: [SK.architecture, SK.legacy, SK.crossTeam, SK.systemDesign, SK.reliability],
     name: T("Legacy → Azure Modernization", "遗留系统到 Azure 的现代化"),
     oneLiner: T(
       "Re-architecting legacy Informatica/Yellowbrick workflows onto Azure.",
@@ -291,6 +313,7 @@ const PROJECTS = [
   },
   {
     slug: "qq-rec-engine",
+    skills: [SK.systemDesign, SK.distributed, SK.configDriven, SK.ownership],
     name: T("QQ Music Recommendation Engine", "QQ 音乐推荐引擎"),
     oneLiner: T(
       "A generalized engine for real-time and scheduled music recommendations.",
@@ -312,6 +335,7 @@ const PROJECTS = [
   },
   {
     slug: "qq-tag-recommendation",
+    skills: [SK.systemDesign, SK.configDriven, SK.recsys, SK.ownership],
     name: T("Tag-Based Related-Song Recommendation", "标签关联歌曲个性化推荐"),
     oneLiner: T(
       "Every song tag becomes a doorway to personalized, related top songs.",
@@ -347,6 +371,7 @@ const PROJECTS = [
   },
   {
     slug: "qq-recall-system",
+    skills: [SK.architecture, SK.distributed, SK.systemDesign, SK.ownership],
     name: T("QQ Music Recall System", "QQ 音乐召回系统"),
     oneLiner: T(
       "A unified recall framework abstracting business logic into operators.",
@@ -368,6 +393,7 @@ const PROJECTS = [
   },
   {
     slug: "vector-retrieval",
+    skills: [SK.perf, SK.distributed, SK.systemDesign, SK.reliability],
     name: T("Real-time Vector Retrieval", "实时向量检索系统"),
     oneLiner: T(
       "Online/offline vector search powering recommendation recall at scale.",
@@ -389,6 +415,7 @@ const PROJECTS = [
   },
   {
     slug: "search-ad-suggestion",
+    skills: [SK.mlEng, SK.problemSolving, SK.dataModeling],
     name: T("Search-Prefix Ad Suggestion", "搜索前缀广告推荐"),
     oneLiner: T(
       "Mining query-prefix intent to surface relevant brand ads.",

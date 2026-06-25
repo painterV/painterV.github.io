@@ -69,6 +69,7 @@ const UI = {
   timeline:    T("Timeline", "时间"),
   stack:       T("Stack", "技术栈"),
   highlights:  T("Highlights", "亮点"),
+  skills_set:  T("Skill set", "能力项"),
   shots:       T("Product screens", "产品截图"),
   hero_hint:   T("move your mouse · the glowing toys are explorable", "移动鼠标 · 发光的玩具可点击探索"),
   tech_since:  T("Using since", "开始使用"),
@@ -566,6 +567,7 @@ function renderProject() {
     `<div class="wrap"><div class="detail-body">` +
       `<p>${esc(tr(p.description))}</p>` +
       (highlights ? `<h3>${esc(tr(UI.highlights))}</h3><ul>${highlights}</ul>` : "") +
+      (p.skills && p.skills.length ? `<h3>${esc(tr(UI.skills_set))}</h3><div class="skill-chips">${p.skills.map((s) => `<span class="skill-chip">${esc(tr(s))}</span>`).join("")}</div>` : "") +
     `</div></div>` +
     (p.gallery && p.gallery.length
       ? `<div class="wrap"><div class="detail-body"><h3>${esc(tr(UI.shots))}</h3></div>` +
