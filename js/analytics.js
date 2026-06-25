@@ -2,7 +2,7 @@
    Set MEASUREMENT_ID to your GA4 property ("G-XXXXXXXXXX") to enable.
    While the placeholder is in place this file makes ZERO network calls. */
 (function () {
-  var MEASUREMENT_ID = "G-XXXXXXXXXX"; // TODO: paste your GA4 Measurement ID here
+  var MEASUREMENT_ID = "G-LE5VY1HVTV"; // TODO: paste your GA4 Measurement ID here
   if (!MEASUREMENT_ID || MEASUREMENT_ID.indexOf("XXXX") !== -1) return;
   var s = document.createElement("script");
   s.async = true;

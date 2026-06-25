@@ -320,6 +320,7 @@ a.cert-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,
 .contact { text-align: center; }
 .contact .links { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-top: 26px; }
 footer { padding: 34px 22px; text-align: center; font-size: 12px; color: var(--ink-soft); border-top: 1px solid rgba(0,0,0,.08); }
+.visit-time { display: inline-block; margin-top: 6px; opacity: .85; font-variant-numeric: tabular-nums; }
 
 /* ---------- Project detail page ---------- */
 .detail-hero { padding: clamp(50px, 8vw, 90px) 0 clamp(30px, 5vw, 50px); }
