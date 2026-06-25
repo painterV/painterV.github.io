@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Wenbao Li</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/analytics.js"></script>
+</head>
+<body class="lang-en">
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="index.html">Wenbao Li</a>
+      <span class="spacer"></span>
+      <a class="link" href="index.html#education" id="nav-back">Back to home</a>
+      <button class="lang-toggle" id="lang-toggle">中文</button>
+    </div>
+  </nav>
+
+  <main id="edu-root"></main>
+
+  <footer>© <span id="year"></span> Wenbao Li</footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/site.js"></script>
+  <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+</body>
+</html>

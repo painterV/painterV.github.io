@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 800" role="img" aria-label="vibe-coded · open source">
+  <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#db2777"/><stop offset="1" stop-color="#f59e0b"/></linearGradient></defs>
+  <rect width="1280" height="800" fill="url(#g)"/>
+  <g fill="#fff" font-family="-apple-system,Segoe UI,sans-serif">
+    <text x="640" y="408" font-size="56" font-weight="700" text-anchor="middle">発音コーチ</text>
+    <text x="640" y="468" font-size="22" text-anchor="middle" opacity=".75">vibe-coded · open source</text>
+  </g>
+</svg>

@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Wenbao Li</title>
+  <meta name="description" content="Wenbao Li — Data & AI Engineer. Data platforms, LLM agents, and quantitative systems.">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/analytics.js"></script>
+</head>
+<body class="lang-en">
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="index.html" id="hero-brand">Wenbao Li</a>
+      <span class="spacer"></span>
+      <a class="link hide-sm" href="#about" id="nav-about">About</a>
+      <a class="link hide-sm" href="#experience" id="nav-exp">Experience</a>
+      <a class="link hide-sm" href="#education" id="nav-edu">Education</a>
+      <a class="link hide-sm" href="#work" id="nav-work">Work</a>
+      <a class="link hide-sm" href="#side" id="nav-side">Side</a>
+      <a class="link hide-sm" href="#tech" id="nav-tech">Stack</a>
+      <a class="link hide-sm" href="#certs" id="nav-certs">Certificates</a>
+      <a class="link hide-sm" href="#contact" id="nav-contact">Contact</a>
+      <button class="lang-toggle" id="lang-toggle">中文</button>
+    </div>
+  </nav>
+
+  <header class="hero" id="hero">
+    <div class="blob b1" data-depth="0.10"></div>
+    <div class="blob b2" data-depth="0.14"></div>
+    <div class="blob b3" data-depth="0.08"></div>
+    <div class="blob b4" data-depth="0.12"></div>
+    <div class="hero-drops" id="hero-drops"></div>
+    <div class="hero-toys" id="hero-toys"></div>
+
+    <div class="hero-content" id="hero-content">
+      <h1 id="hero-name">Wenbao Li</h1>
+      <div class="title" id="hero-title"></div>
+      <p class="tagline" id="hero-tagline"></p>
+      <div class="cta">
+        <a class="btn btn-primary" href="#work" id="cta-work">View work</a>
+        <a class="btn btn-ghost" href="#contact" id="cta-contact">Get in touch ›</a>
+      </div>
+    </div>
+    <div class="hero-hint" id="hero-hint"></div>
+  </header>
+
+  <section id="about" class="alt about">
+    <div class="wrap">
+      <div class="section-head"><h2 id="about-h">About</h2></div>
+      <p id="about-text"></p>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="wrap">
+      <div class="section-head"><h2 id="exp-h">Experience</h2><p id="exp-sub"></p></div>
+      <div class="timeline spine" id="timeline"></div>
+    </div>
+  </section>
+
+  <section id="education">
+    <div class="wrap">
+      <div class="section-head"><h2 id="edu-h">Education</h2><p id="edu-sub"></p></div>
+      <div class="timeline" id="education-list"></div>
+    </div>
+  </section>
+
+  <section id="work" class="alt">
+    <div class="wrap">
+      <div class="section-head"><h2 id="work-h">Selected Work</h2><p id="work-sub"></p></div>
+      <div class="proj-grid" id="proj-grid"></div>
+    </div>
+  </section>
+
+  <section id="side">
+    <div class="wrap">
+      <div class="section-head"><h2 id="side-h">Side Projects</h2><p id="side-sub"></p></div>
+      <div class="proj-grid" id="side-grid"></div>
+    </div>
+  </section>
+
+  <section id="tech" class="alt">
+    <div class="wrap">
+      <div class="section-head"><h2 id="tech-h">Tech Stack</h2><p id="tech-sub"></p></div>
+      <div id="tech-grid"></div>
+    </div>
+  </section>
+
+  <section id="certs">
+    <div class="wrap">
+      <div class="section-head"><h2 id="certs-h">Certificates</h2><p id="certs-sub"></p></div>
+      <div class="cert-grid" id="cert-grid"></div>
+    </div>
+  </section>
+
+  <section id="contact" class="alt contact">
+    <div class="wrap">
+      <div class="section-head"><h2 id="contact-h">Let's talk</h2><p id="contact-sub"></p></div>
+      <div class="links" id="contact-links"></div>
+    </div>
+  </section>
+
+  <footer>© <span id="year"></span> Wenbao Li · Built with no framework.</footer>
+
+  <script src="js/icons.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/site.js"></script>
+  <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+</body>
+</html>

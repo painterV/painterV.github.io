@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" role="img" aria-label="Data and quant">
+  <defs><linearGradient id="d" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0f766e"/><stop offset="1" stop-color="#3b82f6"/></linearGradient></defs>
+  <rect width="1280" height="720" fill="url(#d)"/>
+  <g fill="#fff" font-family="-apple-system,Segoe UI,sans-serif"><text x="640" y="360" font-size="58" font-weight="700" text-anchor="middle">📊 Data &amp; Quant</text>
+  <text x="640" y="420" font-size="24" text-anchor="middle" opacity=".8">replace with a chart or notebook</text></g>
+</svg>

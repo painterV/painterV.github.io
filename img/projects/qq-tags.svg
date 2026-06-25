@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" role="img" aria-label="Tag-based music recommendation reference architecture">
+  <defs>
+    <style>
+      .t{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif}
+      .h1{font-size:30px;font-weight:700;fill:#1d1d1f}
+      .sub{font-size:16px;fill:#6e6e73}
+      .bt{font-size:18px;font-weight:700;fill:#1d1d1f}
+      .bs{font-size:13px;fill:#6e6e73}
+      .stage{font-size:11px;font-weight:700;letter-spacing:1.5px;fill:#86868b}
+      .lab{font-size:12.5px;font-weight:600;fill:#86868b}
+      .band{font-size:15px;font-weight:600;fill:#1d3f63}
+      .disc{font-size:13px;font-style:italic;fill:#9aa0aa}
+    </style>
+    <marker id="ah" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto">
+      <path d="M0 0 L7 3 L0 6 Z" fill="#a1a1aa"/></marker>
+    <marker id="ahd" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto">
+      <path d="M0 0 L7 3 L0 6 Z" fill="#ff6b35"/></marker>
+  </defs>
+
+  <rect width="1280" height="720" fill="#ffffff"/>
+  <rect x="1" y="1" width="1278" height="718" rx="20" fill="none" stroke="#ececef" stroke-width="2"/>
+
+  <text x="64" y="60" class="t h1">Tag-Based Music Recommendation</text>
+  <text x="66" y="88" class="t sub">reference architecture · a system I built at a large-scale music platform</text>
+
+  <!-- caption for supporting blocks -->
+  <text x="602" y="190" class="t lab" text-anchor="middle">industry-generic building blocks</text>
+
+  <!-- pipeline arrows -->
+  <g fill="none" stroke="#c7c7cc" stroke-width="2" marker-end="url(#ah)">
+    <path d="M246 380 H272"/>
+    <path d="M474 380 H500"/>
+    <path d="M702 380 H728"/>
+    <path d="M930 380 H956"/>
+    <path d="M602 276 V328"/>            <!-- vector search -> recall -->
+    <path d="M602 484 V432"/>            <!-- kv store -> recall -->
+    <path d="M830 484 V432"/>            <!-- features -> ranking -->
+  </g>
+  <path d="M374 276 V328" fill="none" stroke="#ff6b35" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#ahd)"/>
+  <text x="386" y="306" class="t lab" fill="#ff6b35">config</text>
+
+  <!-- pipeline -->
+  <!-- Client -->
+  <rect x="48" y="330" width="198" height="100" rx="14" fill="#fff" stroke="#86868b" stroke-width="1.8"/>
+  <text x="68" y="358" class="t stage">CLIENT</text>
+  <text x="68" y="382" class="t bt">Tag interaction</text>
+  <text x="68" y="404" class="t bs">user taps a content tag</text>
+  <text x="68" y="421" class="t bs" font-size="12" fill="#86868b">follow · chart · popularity · genre</text>
+
+  <!-- Gateway -->
+  <rect x="276" y="330" width="198" height="100" rx="14" fill="#fff" stroke="#0071e3" stroke-width="1.8"/>
+  <text x="296" y="358" class="t stage" fill="#0071e3">GATEWAY</text>
+  <text x="296" y="382" class="t bt">Routing</text>
+  <text x="296" y="404" class="t bs">resolve tag type,</text>
+  <text x="296" y="421" class="t bs">dispatch the request</text>
+
+  <!-- Recall -->
+  <rect x="504" y="330" width="198" height="100" rx="14" fill="#fff" stroke="#0071e3" stroke-width="1.8"/>
+  <text x="524" y="358" class="t stage" fill="#0071e3">RECALL</text>
+  <text x="524" y="382" class="t bt">Candidate recall</text>
+  <text x="524" y="404" class="t bs">retrieve related</text>
+  <text x="524" y="421" class="t bs">candidate tracks</text>
+
+  <!-- Ranking -->
+  <rect x="732" y="330" width="198" height="100" rx="14" fill="#fff" stroke="#0071e3" stroke-width="1.8"/>
+  <text x="752" y="358" class="t stage" fill="#0071e3">RANKING</text>
+  <text x="752" y="382" class="t bt">Personalized rank</text>
+  <text x="752" y="404" class="t bs">per-user scoring</text>
+  <text x="752" y="421" class="t bs">&amp; ordering</text>
+
+  <!-- Serving -->
+  <rect x="960" y="330" width="198" height="100" rx="14" fill="#eafaf1" stroke="#15b86c" stroke-width="1.8"/>
+  <text x="980" y="358" class="t stage" fill="#15803d">SERVING</text>
+  <text x="980" y="382" class="t bt">Results</text>
+  <text x="980" y="404" class="t bs">ranked related</text>
+  <text x="980" y="421" class="t bs">tracks → user</text>
+
+  <!-- supporting blocks -->
+  <rect x="276" y="212" width="198" height="62" rx="13" fill="#fff" stroke="#ff6b35" stroke-width="1.6"/>
+  <text x="296" y="238" class="t bt" font-size="16">Config center</text>
+  <text x="296" y="259" class="t bs">tag &amp; routing config</text>
+
+  <rect x="504" y="212" width="198" height="62" rx="13" fill="#fff" stroke="#7c3aed" stroke-width="1.6"/>
+  <text x="524" y="238" class="t bt" font-size="16">Vector search</text>
+  <text x="524" y="259" class="t bs">embedding recall</text>
+
+  <rect x="504" y="486" width="198" height="62" rx="13" fill="#fff" stroke="#d82c20" stroke-width="1.6"/>
+  <text x="524" y="512" class="t bt" font-size="16">KV store / cache</text>
+  <text x="524" y="533" class="t bs">tags &amp; metadata</text>
+
+  <rect x="732" y="486" width="198" height="62" rx="13" fill="#fff" stroke="#14b8a6" stroke-width="1.6"/>
+  <text x="752" y="512" class="t bt" font-size="16">Feature store</text>
+  <text x="752" y="533" class="t bs">per-user features</text>
+
+  <!-- foundation -->
+  <rect x="48" y="596" width="1110" height="56" rx="14" fill="#f3f6fa" stroke="#cdd8e6" stroke-width="1.6"/>
+  <circle cx="84" cy="624" r="6" fill="#1d3f63"/>
+  <text x="102" y="629" class="t band">Service mesh / discovery — registration, discovery &amp; governance for every service</text>
+
+  <text x="64" y="686" class="t disc">Generalized reference architecture for illustration — not representing any specific employer's system.</text>
+</svg>
