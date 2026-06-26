@@ -2,19 +2,23 @@
    Renders an inline SVG pipeline and drives request "packets" with rAF so a
    visitor can crank up traffic and inject per-node failures — showing load
    handling and graceful degradation (each downed stage is served from cache).
+   Node labels are configurable per project via mount(host, {nodes}); a generic
+   placeholder pipeline is used when a project hasn't supplied its own.
    ponytail: latency/QPS numbers are illustrative, not real telemetry. */
 (function () {
-  const NODES = [
-    { id: "client",  x: 70,  label: "CLIENT",  t1: "Tag tap",          t2: "user interaction" },
-    { id: "gateway", x: 230, label: "GATEWAY", t1: "Routing",          t2: "resolve & dispatch" },
-    { id: "recall",  x: 390, label: "RECALL",  t1: "Candidate recall", t2: "related tracks" },
-    { id: "ranking", x: 550, label: "RANKING", t1: "Personalized rank", t2: "per-user scoring" },
-    { id: "serving", x: 710, label: "SERVING", t1: "Results",          t2: "ranked → user" },
+  // generic placeholder pipeline — projects override via opts.nodes (5 stages)
+  const DEFAULT_NODES = [
+    { id: "client",  label: "CLIENT",  t1: "Request in", t2: "user / upstream" },
+    { id: "gateway", label: "GATEWAY", t1: "Routing",    t2: "auth & dispatch" },
+    { id: "service", label: "SERVICE", t1: "Core logic", t2: "business processing" },
+    { id: "store",   label: "STORE",   t1: "Data layer", t2: "primary store" },
+    { id: "serving", label: "SERVING", t1: "Response",   t2: "result → client" },
   ];
   const BW = 150, BH = 78, CY = 160;             // box width/height, top-row center-y
-  const cx = (n) => n.x + BW / 2;
-  const CACHE = { x: 390, y: 280, w: 310, h: 54, cy: 307 };  // wide cache row under recall+ranking
-  const FAILABLE = ["recall", "ranking"];        // stages that can fail over to cache
+  const X = (i) => 70 + i * 160;                 // x of stage i
+  const CXI = (i) => X(i) + BW / 2;
+  const CACHE = { x: 390, y: 280, w: 310, h: 54, cy: 307 };  // wide cache row under stages 2–3
+  const FAIL_IDX = [2, 3];                        // middle stages can fail over to cache
 
   const P99 = { 1: 28, 10: 55, 50: 140 };        // ms by traffic multiplier (healthy)
   const REPLICAS = { 1: 1, 10: 3, 50: 5 };       // entry + cache scale out with traffic
@@ -22,15 +26,13 @@
   const MAX_PACKETS = 240;
 
   const L = (lang) => lang === "zh" ? {
-    hint: "拉高流量,再让某个节点宕机 —— 看请求如何下沉到缓存兜底。",
-    play: "暂停", playOff: "播放", traffic: "流量", reset: "重置",
-    failRecall: "Recall 故障", failRanking: "Ranking 故障",
-    healthy: "正常", degraded: "降级 — 由缓存兜底", rps: "请求/秒", down: "故障",
+    hint: "拉高流量,再让某个节点宕机 —— 看请求如何下沉到缓存兜底。(占位演示,数据为示意)",
+    play: "暂停", playOff: "播放", traffic: "流量", reset: "重置", failSuffix: "故障",
+    healthy: "正常", degraded: "降级 — 由缓存兜底", rps: "请求/秒", down: "故障", cacheNote: "任一阶段宕机时的兜底缓存",
   } : {
-    hint: "Turn up the traffic, then take a node down — watch requests fall back to cache.",
-    play: "Pause", playOff: "Play", traffic: "Traffic", reset: "Reset",
-    failRecall: "Recall down", failRanking: "Ranking down",
-    healthy: "Healthy", degraded: "Degraded — serving from cache", rps: "req/s", down: "DOWN",
+    hint: "Turn up the traffic, then take a node down — watch requests fall back to cache. (placeholder demo, illustrative numbers)",
+    play: "Pause", playOff: "Play", traffic: "Traffic", reset: "Reset", failSuffix: "down",
+    healthy: "Healthy", degraded: "Degraded — serving from cache", rps: "req/s", down: "DOWN", cacheNote: "stale fallback for any downed stage",
   };
 
   function dist(a, b) { return Math.hypot(b[0] - a[0], b[1] - a[1]); }
@@ -43,21 +45,18 @@
     }
     return r[r.length - 1];
   }
-  // a downed stage dips to the cache row at its own x, then rejoins the pipeline
-  function buildRoute(down) {
-    return NODES.map((n) => [cx(n), down[n.id] ? CACHE.cy : CY]);
-  }
 
-  function nodeSvg(n) {
-    const isServe = n.id === "serving";
-    const stroke = isServe ? "#15b86c" : n.id === "client" ? "#86868b" : "#0071e3";
+  function nodeSvg(n, i) {
+    const isServe = i === 4, isClient = i === 0;
+    const stroke = isServe ? "#15b86c" : isClient ? "#86868b" : "#0071e3";
     const fill = isServe ? "#eafaf1" : "#fff";
+    const sx = X(i);
     return `<g id="af-${n.id}">
-      <rect x="${n.x}" y="${CY - BH / 2}" width="${BW}" height="${BH}" rx="13" fill="${fill}" stroke="${stroke}" stroke-width="1.8" data-base="${stroke}"/>
-      <text x="${n.x + 16}" y="${CY - BH / 2 + 22}" class="af-stage" fill="${isServe ? "#15803d" : n.id === "client" ? "#86868b" : "#0071e3"}">${n.label}</text>
-      <text x="${n.x + 16}" y="${CY - BH / 2 + 44}" class="af-t1">${n.t1}</text>
-      <text x="${n.x + 16}" y="${CY - BH / 2 + 62}" class="af-t2">${n.t2}</text>
-      <text x="${n.x + BW - 14}" y="${CY - BH / 2 + 20}" class="af-badge" id="af-badge-${n.id}" text-anchor="end" fill="#d82c20"></text>
+      <rect x="${sx}" y="${CY - BH / 2}" width="${BW}" height="${BH}" rx="13" fill="${fill}" stroke="${stroke}" stroke-width="1.8" data-base="${stroke}"/>
+      <text x="${sx + 16}" y="${CY - BH / 2 + 22}" class="af-stage" fill="${isServe ? "#15803d" : isClient ? "#86868b" : "#0071e3"}">${n.label}</text>
+      <text x="${sx + 16}" y="${CY - BH / 2 + 44}" class="af-t1">${n.t1}</text>
+      <text x="${sx + 16}" y="${CY - BH / 2 + 62}" class="af-t2">${n.t2}</text>
+      <text x="${sx + BW - 14}" y="${CY - BH / 2 + 20}" class="af-badge" id="af-badge-${n.id}" text-anchor="end" fill="#d82c20"></text>
     </g>`;
   }
 
@@ -65,15 +64,19 @@
     opts = opts || {};
     const lang = opts.lang === "zh" ? "zh" : "en";
     const tx = L(lang);
+    const NODES = (opts.nodes && opts.nodes.length === 5) ? opts.nodes : DEFAULT_NODES;
+    const FAILABLE = FAIL_IDX.map((i) => NODES[i].id);
     const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    // a downed stage dips to the cache row at its own x, then rejoins the pipeline
+    const buildRoute = (down) => NODES.map((n, i) => [CXI(i), down[n.id] ? CACHE.cy : CY]);
 
     const arrows = [];
     for (let i = 1; i < NODES.length; i++) {
-      arrows.push(`<line x1="${NODES[i - 1].x + BW + 2}" y1="${CY}" x2="${NODES[i].x - 6}" y2="${CY}" stroke="#c7c7cc" stroke-width="2" marker-end="url(#af-ah)"/>`);
+      arrows.push(`<line x1="${X(i - 1) + BW + 2}" y1="${CY}" x2="${X(i) - 6}" y2="${CY}" stroke="#c7c7cc" stroke-width="2" marker-end="url(#af-ah)"/>`);
     }
-    FAILABLE.forEach((id) => {
-      const n = NODES.find((x) => x.id === id);
-      arrows.push(`<line x1="${cx(n)}" y1="${CY + BH / 2}" x2="${cx(n)}" y2="${CACHE.y}" stroke="#e2c0bd" stroke-width="2" stroke-dasharray="4 4"/>`);
+    FAIL_IDX.forEach((i) => {
+      arrows.push(`<line x1="${CXI(i)}" y1="${CY + BH / 2}" x2="${CXI(i)}" y2="${CACHE.y}" stroke="#e2c0bd" stroke-width="2" stroke-dasharray="4 4"/>`);
     });
 
     root.innerHTML = `
@@ -86,8 +89,7 @@
             <button class="af-btn af-tr" data-mult="10">×10</button>
             <button class="af-btn af-tr" data-mult="50">×50</button>
           </span>
-          <button class="af-btn af-fail" data-node="recall">⚡ ${tx.failRecall}</button>
-          <button class="af-btn af-fail" data-node="ranking">⚡ ${tx.failRanking}</button>
+          ${FAILABLE.map((id) => `<button class="af-btn af-fail" data-node="${id}">⚡ ${NODES.find((n) => n.id === id).label} ${tx.failSuffix}</button>`).join("")}
           <button class="af-btn" data-act="reset">↺ ${tx.reset}</button>
         </div>
         <div class="af-stats">
@@ -114,7 +116,7 @@
           <g id="af-cache">
             <rect x="${CACHE.x}" y="${CACHE.y}" width="${CACHE.w}" height="${CACHE.h}" rx="11" fill="#fff" stroke="#d82c20" stroke-width="1.6"/>
             <text x="${CACHE.x + 16}" y="${CACHE.y + 24}" class="af-t1" font-size="13">KV cache</text>
-            <text x="${CACHE.x + 16}" y="${CACHE.y + 42}" class="af-t2">stale fallback for any downed stage</text>
+            <text x="${CACHE.x + 16}" y="${CACHE.y + 42}" class="af-t2">${tx.cacheNote}</text>
           </g>
           <g id="af-packets" filter="url(#af-glow)"></g>
         </svg>
@@ -128,7 +130,8 @@
     const elQps = root.querySelector("#af-qps");
     const elP99 = root.querySelector("#af-p99");
 
-    const state = { mult: 10, down: { recall: false, ranking: false }, running: !reduce, packets: [], spawnAcc: 0, last: 0 };
+    const down0 = () => { const o = {}; FAILABLE.forEach((id) => (o[id] = false)); return o; };
+    const state = { mult: 10, down: down0(), running: !reduce, packets: [], spawnAcc: 0, last: 0 };
     const anyDown = () => FAILABLE.some((id) => state.down[id]);
 
     const gReplicas = root.querySelector("#af-replicas");
@@ -143,9 +146,8 @@
     }
     function renderReplicas() {
       const n = REPLICAS[state.mult] || 1;
-      const gw = NODES.find((x) => x.id === "gateway");
-      gReplicas.innerHTML = scaledBox(gw.x, CY - BH / 2, BW, BH, 13, n, "#0071e3")
-                          + scaledBox(CACHE.x, CACHE.y, CACHE.w, CACHE.h, 11, n, "#d82c20");
+      gReplicas.innerHTML = scaledBox(X(1), CY - BH / 2, BW, BH, 13, n, "#0071e3")       // entry (gateway)
+                          + scaledBox(CACHE.x, CACHE.y, CACHE.w, CACHE.h, 11, n, "#d82c20"); // cache
     }
     function setTrafficUI() {
       root.querySelectorAll(".af-tr").forEach((b) => b.classList.toggle("on", +b.dataset.mult === state.mult));
@@ -205,7 +207,7 @@
           const p = state.packets[i];
           p.d += SPEED * dt;
           if (p.d >= p.len) {
-            flashNode("serving");
+            flashNode(NODES[4].id);
             p.el.remove(); state.packets.splice(i, 1); continue;
           }
           const pt = pointAt(p.route, p.d);
@@ -226,7 +228,7 @@
       else if (b.dataset.node) { state.down[b.dataset.node] = !state.down[b.dataset.node]; setFailUI(); }
       else if (b.dataset.act === "play") { state.running = !state.running; state.last = 0; setPlayUI(); }
       else if (b.dataset.act === "reset") {
-        state.down = { recall: false, ranking: false }; state.mult = 10; state.running = true; state.last = 0;
+        state.down = down0(); state.mult = 10; state.running = true; state.last = 0;
         state.packets.forEach((p) => p.el.remove()); state.packets = [];
         setFailUI(); setTrafficUI(); setStats(); setPlayUI();
       }

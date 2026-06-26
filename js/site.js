@@ -551,7 +551,7 @@ function renderProject() {
       : `<span class="stack-chip"${title}>${inner}</span>`;
   }).join("");
   const highlights = (p.highlights || []).map((h) => `<li>${esc(tr(h))}</li>`).join("");
-  const interactive = p.interactive === "archflow" && window.ArchFlow;
+  const interactive = !!window.ArchFlow && p.interactive !== false;
 
   root.innerHTML =
     `<div class="detail-hero" style="--co:${esc(p.theme || "#0071e3")}"><div class="wrap">` +
@@ -564,7 +564,7 @@ function renderProject() {
       `</div>` +
       `<div class="detail-stack">${stack}</div>` +
     `</div></div>` +
-    (interactive ? "" : `<div class="wrap"><div class="detail-figure"><img src="${esc(p.figure)}" alt="${esc(tr(p.name))}"></div></div>`) +
+    (p.hideFigure ? "" : `<div class="wrap"><div class="detail-figure"><img src="${esc(p.figure)}" alt="${esc(tr(p.name))}"></div></div>`) +
     `<div class="wrap"><div class="detail-body">` +
       `<p>${esc(tr(p.description))}</p>` +
       (highlights ? `<h3>${esc(tr(UI.highlights))}</h3><ul>${highlights}</ul>` : "") +
@@ -585,7 +585,7 @@ function renderProject() {
 
   observeReveal();
   const host = document.getElementById("archflow-host");
-  if (host && window.ArchFlow) ArchFlow.mount(host, { lang: LANG, theme: p.theme });
+  if (host && window.ArchFlow) ArchFlow.mount(host, { lang: LANG, theme: p.theme, nodes: p.arch && p.arch.nodes });
 }
 
 /* ----- helpers ----- */

@@ -347,7 +347,14 @@ const PROJECTS = [
     ),
     figure: "img/projects/qq-tags-anim.svg",
     thumb: "img/projects/qq-tags-thumb.svg",
-    interactive: "archflow",
+    hideFigure: true,
+    arch: { nodes: [
+      { id: "client",  label: "CLIENT",  t1: "Tag tap",          t2: "user interaction" },
+      { id: "gateway", label: "GATEWAY", t1: "Routing",          t2: "resolve & dispatch" },
+      { id: "recall",  label: "RECALL",  t1: "Candidate recall", t2: "related tracks" },
+      { id: "ranking", label: "RANKING", t1: "Personalized rank", t2: "per-user scoring" },
+      { id: "serving", label: "SERVING", t1: "Results",          t2: "ranked → user" },
+    ] },
     role: T("Senior Software Engineer · Owner", "高级软件工程师 · 负责人"),
     date: "2021 — 2022 · Tencent Music",
     stack: [
