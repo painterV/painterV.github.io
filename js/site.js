@@ -551,6 +551,7 @@ function renderProject() {
       : `<span class="stack-chip"${title}>${inner}</span>`;
   }).join("");
   const highlights = (p.highlights || []).map((h) => `<li>${esc(tr(h))}</li>`).join("");
+  const interactive = p.interactive === "archflow" && window.ArchFlow;
 
   root.innerHTML =
     `<div class="detail-hero" style="--co:${esc(p.theme || "#0071e3")}"><div class="wrap">` +
@@ -563,14 +564,16 @@ function renderProject() {
       `</div>` +
       `<div class="detail-stack">${stack}</div>` +
     `</div></div>` +
-    (p.interactive === "archflow" && window.ArchFlow
-      ? `<div class="wrap"><div class="detail-figure" id="archflow-host"></div></div>`
-      : `<div class="wrap"><div class="detail-figure"><img src="${esc(p.figure)}" alt="${esc(tr(p.name))}"></div></div>`) +
+    (interactive ? "" : `<div class="wrap"><div class="detail-figure"><img src="${esc(p.figure)}" alt="${esc(tr(p.name))}"></div></div>`) +
     `<div class="wrap"><div class="detail-body">` +
       `<p>${esc(tr(p.description))}</p>` +
       (highlights ? `<h3>${esc(tr(UI.highlights))}</h3><ul>${highlights}</ul>` : "") +
       (p.skills && p.skills.length ? `<h3>${esc(tr(UI.skills_set))}</h3><div class="skill-chips">${p.skills.map((s) => `<span class="skill-chip">${esc(tr(s))}</span>`).join("")}</div>` : "") +
     `</div></div>` +
+    (interactive
+      ? `<div class="wrap"><div class="detail-body"><h3>${esc(tr(T("Explore the architecture — live", "交互式架构演示"))) }</h3></div>` +
+        `<div class="wrap"><div class="detail-figure" id="archflow-host"></div></div>`
+      : "") +
     (p.gallery && p.gallery.length
       ? `<div class="wrap"><div class="detail-body"><h3>${esc(tr(UI.shots))}</h3></div>` +
         `<div class="proj-gallery">` +
