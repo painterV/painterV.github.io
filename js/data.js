@@ -345,7 +345,7 @@ const PROJECTS = [
       "Every song tag becomes a doorway to personalized, related top songs.",
       "让每个歌曲标签都成为通往个性化关联歌单的入口。"
     ),
-    figure: "img/projects/qq-tags.svg",
+    figure: "img/projects/qq-tags-anim.svg",
     thumb: "img/projects/qq-tags-thumb.svg",
     role: T("Senior Software Engineer · Owner", "高级软件工程师 · 负责人"),
     date: "2021 — 2022 · Tencent Music",
