@@ -269,6 +269,7 @@ const SK = {
 const PROJECTS = [
   {
     slug: "core-settlement-engine",
+    theme: "#1d3f63",
     skills: [SK.systemDesign, SK.reliability, SK.dataModeling, SK.techLead, SK.ownership],
     name: T("Core Settlement Engine", "核心结算引擎"),
     oneLiner: T(
@@ -291,6 +292,7 @@ const PROJECTS = [
   },
   {
     slug: "cloud-modernization",
+    theme: "#1d3f63",
     skills: [SK.architecture, SK.legacy, SK.crossTeam, SK.systemDesign, SK.reliability],
     name: T("Legacy → Azure Modernization", "遗留系统到 Azure 的现代化"),
     oneLiner: T(
@@ -313,6 +315,7 @@ const PROJECTS = [
   },
   {
     slug: "qq-rec-engine",
+    theme: "#15b86c",
     skills: [SK.systemDesign, SK.distributed, SK.configDriven, SK.ownership],
     name: T("QQ Music Recommendation Engine", "QQ 音乐推荐引擎"),
     oneLiner: T(
@@ -335,6 +338,7 @@ const PROJECTS = [
   },
   {
     slug: "qq-tag-recommendation",
+    theme: "#15b86c",
     skills: [SK.systemDesign, SK.configDriven, SK.recsys, SK.ownership],
     name: T("Tag-Based Related-Song Recommendation", "标签关联歌曲个性化推荐"),
     oneLiner: T(
@@ -372,6 +376,7 @@ const PROJECTS = [
   },
   {
     slug: "qq-recall-system",
+    theme: "#15b86c",
     skills: [SK.architecture, SK.distributed, SK.systemDesign, SK.ownership],
     name: T("QQ Music Recall System", "QQ 音乐召回系统"),
     oneLiner: T(
@@ -394,6 +399,7 @@ const PROJECTS = [
   },
   {
     slug: "vector-retrieval",
+    theme: "#15b86c",
     skills: [SK.perf, SK.distributed, SK.systemDesign, SK.reliability],
     name: T("Real-time Vector Retrieval", "实时向量检索系统"),
     oneLiner: T(
@@ -416,6 +422,7 @@ const PROJECTS = [
   },
   {
     slug: "search-ad-suggestion",
+    theme: "#2319dc",
     skills: [SK.mlEng, SK.problemSolving, SK.dataModeling],
     name: T("Search-Prefix Ad Suggestion", "搜索前缀广告推荐"),
     oneLiner: T(

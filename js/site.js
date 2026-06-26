@@ -553,7 +553,7 @@ function renderProject() {
   const highlights = (p.highlights || []).map((h) => `<li>${esc(tr(h))}</li>`).join("");
 
   root.innerHTML =
-    `<div class="detail-hero"><div class="wrap">` +
+    `<div class="detail-hero" style="--co:${esc(p.theme || "#0071e3")}"><div class="wrap">` +
       `<a class="detail-back" href="index.html">‹ ${esc(tr(UI.back))}</a>` +
       `<h1>${esc(tr(p.name))}</h1>` +
       `<p class="one">${esc(tr(p.oneLiner))}</p>` +
