@@ -347,6 +347,7 @@ const PROJECTS = [
     ),
     figure: "img/projects/qq-tags-anim.svg",
     thumb: "img/projects/qq-tags-thumb.svg",
+    interactive: "archflow",
     role: T("Senior Software Engineer · Owner", "高级软件工程师 · 负责人"),
     date: "2021 — 2022 · Tencent Music",
     stack: [

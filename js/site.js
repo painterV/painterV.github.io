@@ -563,7 +563,9 @@ function renderProject() {
       `</div>` +
       `<div class="detail-stack">${stack}</div>` +
     `</div></div>` +
-    `<div class="wrap"><div class="detail-figure"><img src="${esc(p.figure)}" alt="${esc(tr(p.name))}"></div></div>` +
+    (p.interactive === "archflow" && window.ArchFlow
+      ? `<div class="wrap"><div class="detail-figure" id="archflow-host"></div></div>`
+      : `<div class="wrap"><div class="detail-figure"><img src="${esc(p.figure)}" alt="${esc(tr(p.name))}"></div></div>`) +
     `<div class="wrap"><div class="detail-body">` +
       `<p>${esc(tr(p.description))}</p>` +
       (highlights ? `<h3>${esc(tr(UI.highlights))}</h3><ul>${highlights}</ul>` : "") +
@@ -579,6 +581,8 @@ function renderProject() {
       : "");
 
   observeReveal();
+  const host = document.getElementById("archflow-host");
+  if (host && window.ArchFlow) ArchFlow.mount(host, { lang: LANG, theme: p.theme });
 }
 
 /* ----- helpers ----- */
