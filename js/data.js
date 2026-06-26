@@ -422,6 +422,7 @@ const PROJECTS = [
   },
   {
     slug: "search-ad-suggestion",
+    thumb: "img/projects/ad-suggest-thumb.svg",
     theme: "#2319dc",
     skills: [SK.mlEng, SK.problemSolving, SK.dataModeling],
     name: T("Search-Prefix Ad Suggestion", "搜索前缀广告推荐"),
