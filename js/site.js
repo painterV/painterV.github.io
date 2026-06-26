@@ -571,8 +571,8 @@ function renderProject() {
       (p.skills && p.skills.length ? `<h3>${esc(tr(UI.skills_set))}</h3><div class="skill-chips">${p.skills.map((s) => `<span class="skill-chip">${esc(tr(s))}</span>`).join("")}</div>` : "") +
     `</div></div>` +
     (interactive
-      ? `<div class="wrap"><div class="detail-body"><h3>${esc(tr(T("Explore the architecture — live", "交互式架构演示"))) }</h3></div>` +
-        `<div class="wrap"><div class="detail-figure" id="archflow-host"></div></div>`
+      ? `<div class="wrap"><div class="detail-body"><h3>${esc(tr(T("Explore the architecture — live", "交互式架构演示"))) }</h3>` +
+        `<div id="archflow-host"></div></div></div>`
       : "") +
     (p.gallery && p.gallery.length
       ? `<div class="wrap"><div class="detail-body"><h3>${esc(tr(UI.shots))}</h3></div>` +
