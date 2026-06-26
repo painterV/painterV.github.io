@@ -17,6 +17,7 @@
   const FAILABLE = ["recall", "ranking"];        // stages that can fail over to cache
 
   const P99 = { 1: 28, 10: 55, 50: 140 };        // ms by traffic multiplier (healthy)
+  const REPLICAS = { 1: 1, 10: 3, 50: 5 };       // entry + cache scale out with traffic
   const SPEED = 330;                              // px / sec along the route
   const MAX_PACKETS = 240;
 
@@ -104,9 +105,11 @@
               .af-t1{font:700 14px -apple-system,Segoe UI,sans-serif;fill:#1d1d1f}
               .af-t2{font:11px -apple-system,Segoe UI,sans-serif;fill:#86868b}
               .af-badge{font:700 9px -apple-system,Segoe UI,sans-serif;letter-spacing:.5px}
+              .af-rep{font:700 11px -apple-system,Segoe UI,sans-serif}
             </style>
           </defs>
           ${arrows.join("")}
+          <g id="af-replicas"></g>
           ${NODES.map(nodeSvg).join("")}
           <g id="af-cache">
             <rect x="${CACHE.x}" y="${CACHE.y}" width="${CACHE.w}" height="${CACHE.h}" rx="11" fill="#fff" stroke="#d82c20" stroke-width="1.6"/>
@@ -128,8 +131,25 @@
     const state = { mult: 10, down: { recall: false, ranking: false }, running: !reduce, packets: [], spawnAcc: 0, last: 0 };
     const anyDown = () => FAILABLE.some((id) => state.down[id]);
 
+    const gReplicas = root.querySelector("#af-replicas");
+    function scaledBox(x, y, w, h, rx, n, color) {
+      let s = "";
+      for (let i = n - 1; i >= 1; i--) {            // faint stacked instances behind the node
+        const o = i * 4;
+        s += `<rect x="${x + o}" y="${y - o}" width="${w}" height="${h}" rx="${rx}" fill="#fff" stroke="${color}" stroke-width="1.4" opacity="${Math.max(0.2, 0.6 - (i - 1) * 0.12).toFixed(2)}"/>`;
+      }
+      if (n > 1) s += `<text x="${x + w / 2}" y="${y - (n - 1) * 4 - 7}" text-anchor="middle" class="af-rep" fill="${color}">×${n}</text>`;
+      return s;
+    }
+    function renderReplicas() {
+      const n = REPLICAS[state.mult] || 1;
+      const gw = NODES.find((x) => x.id === "gateway");
+      gReplicas.innerHTML = scaledBox(gw.x, CY - BH / 2, BW, BH, 13, n, "#0071e3")
+                          + scaledBox(CACHE.x, CACHE.y, CACHE.w, CACHE.h, 11, n, "#d82c20");
+    }
     function setTrafficUI() {
       root.querySelectorAll(".af-tr").forEach((b) => b.classList.toggle("on", +b.dataset.mult === state.mult));
+      renderReplicas();
     }
     function setStats() {
       const q = state.mult * 1.8;
