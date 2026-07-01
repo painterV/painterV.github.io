@@ -479,6 +479,18 @@ const SIDE = [
     repo: "https://github.com/painterV/ACEJapaneseHatsuOnn",
     demo: "https://painterv.github.io/ACEJapaneseHatsuOnn/",
   },
+  {
+    name: T("Superset for VS Code", "Superset for VS Code"),
+    oneLiner: T(
+      "A VS Code extension to work with Apache Superset without leaving the editor — Jinja-SQL editing, query execution, and database browsing.",
+      "在编辑器内直接对接 Apache Superset 的 VS Code 扩展 —— Jinja-SQL 编辑、执行查询、浏览数据库。"
+    ),
+    tech: "TypeScript · VS Code API · Superset REST API",
+    figure: "img/projects/vscode-superset.svg",
+    repo: "https://github.com/painterV/vscode-superset",
+    demo: "https://marketplace.visualstudio.com/items?itemName=Wenbaoli.vscode-superset",
+    demoLabel: T("Marketplace", "应用市场"),
+  },
 ];
 
 /* Tech stack. Each item -> clickable tag page at tech.html?s=<id>.

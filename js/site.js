@@ -200,7 +200,7 @@ function renderHome() {
     const card = el("div", "proj-card side-card reveal");
     const primary = s.demo || s.repo;
     const links =
-      (s.demo ? `<a class="proj-more" href="${esc(s.demo)}" target="_blank" rel="noopener">${esc(tr(UI.side_demo))} ↗</a>` : "") +
+      (s.demo ? `<a class="proj-more" href="${esc(s.demo)}" target="_blank" rel="noopener">${esc(s.demoLabel ? tr(s.demoLabel) : tr(UI.side_demo))} ↗</a>` : "") +
       `<a class="side-repo" href="${esc(s.repo)}" target="_blank" rel="noopener">${esc(tr(UI.side_view))} ↗</a>`;
     card.innerHTML =
       `<a class="proj-figure" href="${esc(primary)}" target="_blank" rel="noopener"><img src="${esc(s.figure)}" alt="${esc(tr(s.name))}" loading="lazy"></a>` +
