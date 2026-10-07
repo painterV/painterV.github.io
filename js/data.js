@@ -42,8 +42,8 @@ const EXPERIENCE = [
     role: T("Senior Data Engineer", "高级数据工程师"),
     date: "Sep 2023 — Present · Tokyo",
     summary: T(
-      "Data engineering for retail marketing — settlement, basket & coupon data, and a legacy-to-Azure migration. Grew from individual contributor to manager.",
-      "零售营销的数据工程 —— 结算、购物篮与优惠券数据,以及遗留系统上云(Azure)。已从独立贡献者成长为管理者。"
+      "Data engineering for retail marketing — settlement, basket & coupon data, and a legacy-to-Azure migration. Grew from individual contributor to manager, and spoke for the company at Snowflake World Tour Tokyo 2026.",
+      "零售营销的数据工程 —— 结算、购物篮与优惠券数据,以及遗留系统上云(Azure)。已从独立贡献者成长为管理者,并于 2026 年代表公司在 Snowflake World Tour Tokyo 演讲。"
     ),
     focus: T(
       "Catalina's data engineering — turning in-store basket and coupon data into transaction-grade settlement, migrating legacy pipelines to a cloud-native Azure stack, and growing from individual contributor into management.",
@@ -56,6 +56,8 @@ const EXPERIENCE = [
         note: T("Recognized for transaction-grade settlement and the legacy-to-cloud migration.", "因交易级结算与遗留系统上云获得晋升。") },
       { date: "Mar 2026", level: T("Manager", "管理"), title: T("Took on management", "开始带团队"),
         note: T("Gained management responsibility, with 2 direct reports.", "获得管理职责,直接下属 2 人。") },
+      { date: "Sep 2026", level: T("Talk", "演讲"), title: T("Speaker — Snowflake World Tour Tokyo", "演讲 — Snowflake World Tour Tokyo"),
+        note: T("Presented on behalf of Catalina Marketing Japan.", "代表 Catalina Marketing Japan 登台发表。") },
     ],
     projects: ["core-settlement-engine", "cloud-modernization"],
   },
@@ -604,6 +606,12 @@ const TOPICS = [
    url = credential link (optional; card becomes clickable). ponytail: placeholder. */
 const CERTS = [
   {
+    name: T("SnowPro Advanced: Architect", "SnowPro Advanced: Architect"),
+    issuer: "Snowflake", date: "2026",
+    icon: { slug: "snowflake" },
+    url: "",
+  },
+  {
     name: T("Certified Data Engineer Associate", "数据工程师助理认证"),
     issuer: "Databricks", date: "2025",
     icon: { slug: "databricks" },
@@ -617,7 +625,7 @@ const CERTS = [
   },
   {
     name: T("SnowPro Core", "SnowPro Core"),
-    issuer: "Snowflake", date: "2024",
+    issuer: "Snowflake", date: "2026",
     icon: { slug: "snowflake" },
     url: "https://achieve.snowflake.com/95b7d518-ee43-40d4-a3e5-75dadc62599c#acc.oswtAmr5",
   },
