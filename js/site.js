@@ -318,7 +318,7 @@ function renderCompany() {
     `<div class="jrny-item"><div class="jrny-date">${esc(typeof m.date === "string" ? m.date : tr(m.date))}</div>` +
     `<div><div class="jrny-title">` +
       (m.level ? `<span class="jrny-level">${esc(typeof m.level === "string" ? m.level : tr(m.level))}</span>` : "") +
-      `${esc(tr(m.title))}</div>` +
+      (m.url ? `<a href="${esc(m.url)}" target="_blank" rel="noopener">${esc(tr(m.title))} ↗</a>` : esc(tr(m.title))) + `</div>` +
     `<div class="jrny-note">${esc(tr(m.note))}</div></div></div>`).join("");
 
   const projItems = (e.projects || [])
